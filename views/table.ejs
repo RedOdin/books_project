@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<meta charset = "utf-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+		<title><%= database %> DB</title>
+ 		<link rel="shortcut icon" href="public/assets/film.ico" type="image/x-icon">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	</head>
+
+	<body>
+    <style type="text/css">
+    body{
+    background:  url(https://wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-10.jpg);
+    }
+    .container {
+      background: #d5e4ddab url();
+      height: 100%;
+      width: 800px;
+      padding: 10px;
+      margin: auto;
+    }
+    .insert{
+        border: 1.5px solid #7FFF00;
+    }
+    .update{
+        border: 1.5px solid #7FFF00;
+        margin-bottom: 5px;
+    }
+    .delete{
+        border: 1.5px solid #ff0000;
+        margin-bottom: 5px;
+    }
+    td{
+        width: 100px;
+    }
+    button {
+    background: -moz-linear-gradient(#00BBD6, #EBFFFF);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#00BBD6), to(#EBFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+    padding: 3px 7px;
+    width: 85px;
+    color: #333;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 1em;
+   }
+  </style>
+  <div class = "container">
+		<table width=100% border="0" cellpadding="4">
+		  <thead>
+		    <tr align="left" valign="top">
+					<% upCaseColumns.forEach(function(column) { %>
+		      	<th><%= column %></th>
+					<% }); %>
+           <th>
+          <form method="post" action="/<%= table %>/insert" align="right">
+            <button type="submit" name="insert" class="insert">Insert</button>
+          </form>
+          </th>
+		    </tr>
+		  </thead>
+		  <tbody>
+				<% rows.forEach(function(row) { %>
+			    <tr align="left" width = 100% valign="top">
+						<th width = 30px><%= row.id %></th>
+						<%- include(`partials/${table}`, {row: row}); -%>
+			      <td width = 30px align="right>
+							<div class="btn-group-vertical">
+								<form method="post" action="/<%= table %>/update/<%= row.id %>" align="right">
+									<button type="submit" name="update" class = "update">Update</button>
+								</form>
+								<form method="post" action="/<%= table %>/delete/<%= row.id %>" align="right">
+									<button type="submit" name="delete" class = "delete">Delete</button>
+								</form>
+							</div>
+						</td>
+			    </tr>
+				<% }); %>
+		  </tbody>
+		</table>
+  </div>
+	</body>

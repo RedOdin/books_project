@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	<head>
+		<meta charset = "utf-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+		<title><%= database %> DB</title>
+ 		<link rel="shortcut icon" href="public/assets/film.ico" type="image/x-icon">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	</head>
+
+	<body>
+		<style type="text/css">
+		body{
+		background:  url(https://wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-10.jpg);
+		}
+		.container {
+			background: #d5e4ddab url();
+			height: 100%;
+			width: 700px;
+			padding: 10px;
+			margin: auto;
+		}
+		button {
+		background: -moz-linear-gradient(#00BBD6, #EBFFFF);
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(#00BBD6), to(#EBFFFF));
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BBD6', endColorstr='#EBFFFF');
+		padding: 3px 7px;
+		color: #333;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		border: 1px solid #666;
+		font-size: 2em;
+	 }
+	</style>
+		<% if (errors) { %>
+			<% for (let i = 0; i < errors.length; i++) { %>
+				<div class="container">
+					<div class="alert alert-danger"><%= errors[i].msg %></div>
+				</div>
+			<% } %>
+		<% } %>
+		<div class="container">
+	    <form method="post" action="/<%= table %>/save" align="center">
+	      <div class="form-group">
+	        <label for="exampleFormControlInput1"><%= upCaseColumns[1] %>:</label>
+					<input type="text" name="<%= columns[1] %>" <% if (rows && rows[0].e_mail) { %> value="<%= rows[0].e_mail.trim() %>" <% } %> class="form-control" id="exampleFormControlInput1" required>
+	      </div>
+	      <div class="form-group">
+	        <label for="exampleFormControlInput1"><%= upCaseColumns[2] %>:</label>
+	        <input type="text" name="<%= columns[2] %>" <% if (rows && rows[0].nickname) { %> value="<%= rows[0].nickname.trim() %>" <% } %> class="form-control" id="exampleFormControlInput1" required>
+	      </div>
+				<div class="form-group">
+				 <label for="exampleFormControlInput1"><%= upCaseColumns[3] %>:</label>
+				 <input type="password" name="<%= columns[3] %>" class="form-control" id="exampleFormControlInput1" required>
+			 </div>
+	      <button type="submit" name="<%= operation %>" class="btn btn-success" align="center"><%= operation %></button>
+	    </form>
+		</div>
+	</body>
